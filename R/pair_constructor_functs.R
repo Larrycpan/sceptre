@@ -37,7 +37,7 @@ construct_cis_pairs <- function(sceptre_object, positive_control_pairs = data.fr
     unique_grna_targets <- unique(grna_target_data_frame_curr_chr$grna_target)
     lapply(X = unique_grna_targets, FUN = function(unique_grna_target) {
       x <- grna_target_data_frame_curr_chr[grna_target_data_frame_curr_chr$grna_target == unique_grna_target,]
-      min_posit <- min(x$start); max_posit <- max(x$end)
+      min_posit <- as.numeric(min(x$start)); max_posit <- as.numeric(max(x$end))
       midpoint <- as.integer(floor((min_posit + max_posit)/2))
       paired_responses <- response_ids[compute_genes_within_distance(midpoint, response_posits, distance_threshold)]
       if (length(paired_responses) >= 1L) {
